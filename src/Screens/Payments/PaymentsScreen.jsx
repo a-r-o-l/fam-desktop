@@ -78,8 +78,8 @@ export const PaymentsScreen = () => {
   }, [renters]);
 
   return (
-    <div className="flex flex-1 flex-col p-10 h-full">
-      <HeaderTitle title="Pagos" />
+    <div className="flex flex-1 flex-col h-full">
+      <HeaderTitle title="Pagos" description="manejo de pagos" />
       <div className="w-3/5 justify-between flex self-center mt-20 gap-10">
         <div className="w-1/3 flex flex-row items-center gap-5">
           <FaBuilding className="w-6 h-6" />
