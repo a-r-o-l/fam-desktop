@@ -70,9 +70,12 @@ export const PaymentCard = ({ payment }) => {
     },
     [payed, payment.id, updatePayment]
   );
-
   return (
-    <div className="border shadow-md w-full rounded-md flex-row flex pr-5 mt-5 justify-between items-center max-w-screen-md">
+    <div
+      className={`border shadow-md w-full rounded-md flex-row flex pr-5 mt-5 justify-between items-center max-w-screen-md bg-${
+        colorScheme === "dark" ? "black" : "slate-600"
+      }`}
+    >
       <div
         className={`flex max-h-32 py-2 px-2 justify-center items-start flex-col w-40 ${
           payed ? "bg-green-600" : "bg-red-600"

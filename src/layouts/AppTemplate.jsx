@@ -70,7 +70,9 @@ export const AppTemplate = () => {
             hiddenFrom="sm"
             size="sm"
           />
-          <Image src="./fam-logo3.png" fit="cover" h={80} w={80} />
+          <div className="w-20 h-20 rounded-full overflow-hidden flex justify-center items-center border-white border-4">
+            <Image src="./fam-logo4.jpg" fit="cover" h={80} w={100} />
+          </div>
 
           <div style={{ marginLeft: "auto" }}>
             <ActionIcon
