@@ -4,6 +4,7 @@ import { buildingsApiService } from "../../services/buildingsApiService";
 import { HeaderTitle } from "../../components/Header/HeaderTitle";
 
 import { BuildingForm } from "./components/BuildingForm";
+import { Text } from "@mantine/core";
 
 export const BuildingScreen = () => {
   const [buildings, setBuildings] = useState([]);
@@ -24,7 +25,7 @@ export const BuildingScreen = () => {
     <div className="flex flex-col p-10 flex-1">
       <HeaderTitle title="Complejos" />
       <div className="flex flex-row gap-20 justify-center mt-20">
-        <div className="flex flex-1 justify-end">
+        <div className="flex flex-1 justify-end items-end">
           <BuildingForm />
         </div>
         <div className="flex w-1/3 flex-col">
@@ -33,12 +34,12 @@ export const BuildingScreen = () => {
               key={building.id}
               className="flex flex-col flex-1 justify-center"
             >
-              <p className="font-extrabold text-2xl dark:text-white">
+              <Text>
                 {building.name}
-              </p>
-              <Typography variant="body1" className="dark:text-white">
+              </Text>
+              <Text>
                 {building.address}
-              </Typography>
+              </Text>
             </div>
           ))}
         </div>

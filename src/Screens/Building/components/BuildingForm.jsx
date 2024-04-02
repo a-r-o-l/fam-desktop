@@ -4,10 +4,12 @@ import { Controller, useForm } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { TextField } from "@mui/material";
+import { Input, TextInput } from "@mantine/core";
+import { useEffect } from "react";
 
 const schema = yup
   .object({
-    name: yup.string().required("El nombre es requerido"),
+    name: yup.string().required("El nombre es requerido").max(3,""),
     address: yup.string().required("La dirección es requerida"),
   })
   .required();
@@ -24,72 +26,63 @@ export const BuildingForm = () => {
   });
 
   const onSubmit = async (data) => {
-    createBuilding.mutateAsync(data);
-    if (createBuilding.isSuccess) {
-      console.log("success");
-    }
+    console.log(data)
+    // createBuilding.mutateAsync(data);
+    // if (createBuilding.isSuccess) {
+    //   console.log("success");
+    // }
   };
 
+  useEffect(()=>{
+    console.log(errors)
+  },[errors])
   return (
     <form
       className="flex w-1/2 flex-col gap-5 border rounded-lg p-10"
       onSubmit={handleSubmit(onSubmit)}
     >
       <div>
-        <div className="mb-2 block">
-          <Label htmlFor="name" value="nombre" />
-        </div>
         <Controller
           name="name"
           control={control}
           defaultValue={""}
           render={({ field }) => (
-            <TextField
-              {...field}
-              error={!!errors.name}
-              required
-              helperText={errors?.name?.message}
-              id="name"
-              variant="outlined"
-              type="text"
-              fullWidth
-              size="small"
-              sx={{
-                "& .MuiOutlinedInput-root": {
-                  borderRadius: "10px",
-                  overflow: "hidden",
-                },
-              }}
-            />
+            <Input.Wrapper>
+              <Input.Label>Nombre</Input.Label>
+              <Input {...field} value={field.value} error={!!errors?.name}/>
+              <Input.Error>{errors?.name?.message || ""}</Input.Error>
+            </Input.Wrapper>
           )}
         />
       </div>
       <div>
-        <div className="mb-2 block">
-          <Label htmlFor="address" value="direccion" />
-        </div>
         <Controller
           name="address"
           control={control}
           defaultValue={""}
           render={({ field }) => (
-            <TextField
-              {...field}
-              error={!!errors.address}
-              required
-              helperText={errors?.address?.message}
-              id="address"
-              variant="outlined"
-              type="text"
-              fullWidth
-              size="small"
-              sx={{
-                "& .MuiOutlinedInput-root": {
-                  borderRadius: "10px",
-                  overflow: "hidden",
-                },
-              }}
-            />
+            // <TextField
+            //   {...field}
+            //   error={!!errors.address}
+            //   required
+            //   helperText={errors?.address?.message}
+            //   id="address"
+            //   variant="outlined"
+            //   type="text"
+            //   fullWidth
+            //   size="small"
+            //   sx={{
+            //     "& .MuiOutlinedInput-root": {
+            //       borderRadius: "10px",
+            //       overflow: "hidden",
+            //     },
+            //   }}
+            // />
+            <Input.Wrapper>
+              <Input.Label>Direccion</Input.Label>
+              <Input {...field} value={field.value} error={!!errors?.address}/>
+              <Input.Error>{errors?.address?.message || ""}</Input.Error>
+            </Input.Wrapper>
           )}
         />
       </div>
