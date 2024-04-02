@@ -14,6 +14,11 @@ import { createStyles, useMantineTheme } from "@mantine/styles";
 import { MoonIcon, SunIcon } from "@radix-ui/react-icons";
 import views from "../routes/views";
 import { NavLink } from "react-router-dom";
+import { MdPeopleOutline } from "react-icons/md";
+import { LiaBuilding } from "react-icons/lia";
+import { PiMoneyLight } from "react-icons/pi";
+import { IoAnalytics } from "react-icons/io5";
+import { GiSettingsKnobs } from "react-icons/gi";
 
 export const AppTemplate = () => {
   const { colorScheme, setColorScheme } = useMantineColorScheme();
@@ -29,19 +34,19 @@ export const AppTemplate = () => {
     navLink: {
       display: "block",
       width: "100%",
-      padding: theme.spacing.xs,
+      padding: theme.spacing.md,
       borderRadius: theme.radius.sm,
-      color: colorScheme === "dark" ? theme.colors.dark[0] : theme.black,
+      color: colorScheme === "dark" ? "white" : "black",
       textDecoration: "none",
 
       "&:hover": {
         backgroundColor:
-          colorScheme === "dark" ? theme.colors.dark[6] : theme.colors.gray[1],
+          colorScheme === "dark" ? theme.colors.dark[2] : theme.colors.gray[1],
       },
     },
     navLinkActive: {
-      backgroundColor:
-        colorScheme === "dark" ? theme.colors.dark[6] : theme.colors.gray[1],
+      backgroundColor: colorScheme === "dark" ? "white" : "black",
+      color: colorScheme === "dark" ? "black" : "white",
     },
   }));
 
@@ -90,21 +95,33 @@ export const AppTemplate = () => {
         </Group>
       </AppShell.Header>
       <AppShell.Navbar p="md">
-        {views?.map((view, index) => (
-          <NavLink
-            align="left"
-            to={view.path}
-            key={index}
-            onClick={() => setOpened(false)}
-            className={({ isActive }) =>
-              classes.navLink + " " + (isActive ? classes.navLinkActive : "")
-            }
-          >
-            <Group>
-              <Text>{view.name}</Text>
-            </Group>
-          </NavLink>
-        ))}
+        {views?.map((view, index) => {
+          if (!view.name) {
+            return null;
+          }
+          return (
+            <NavLink
+              align="left"
+              to={view.path}
+              key={index}
+              onClick={() => setOpened(false)}
+              className={({ isActive }) =>
+                classes.navLink + " " + (isActive ? classes.navLinkActive : "")
+              }
+            >
+              <Group>
+                {view.name === "Pagos" && <PiMoneyLight fontSize={25} />}
+                {view.name === "Complejos" && <LiaBuilding fontSize={25} />}
+                {view.name === "Inquilinos" && (
+                  <MdPeopleOutline fontSize={25} />
+                )}
+                {view.name === "Analiticas" && <IoAnalytics fontSize={25} />}
+                {view.name === "Opciones" && <GiSettingsKnobs fontSize={25} />}
+                <Text size="xl">{view.name}</Text>
+              </Group>
+            </NavLink>
+          );
+        })}
       </AppShell.Navbar>
       <AppShell.Main>
         <Router />
